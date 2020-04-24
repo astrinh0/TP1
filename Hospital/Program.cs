@@ -34,6 +34,7 @@ namespace Hospital
             
 
             Syntomns syntomns = new Syntomns("Cancer", Syntomns.Screening.E, medic.idStaff);
+            Console.WriteLine(syntomns.ToString());
             syntomns.AddCodPatient(syntomns, paciente.idPatient);
             syntomns.PrintArray(syntomns.codPatient);
             Console.ReadKey();

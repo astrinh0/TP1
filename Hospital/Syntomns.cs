@@ -26,7 +26,7 @@ namespace Hospital
         public int idSyntomns;
         public string description;
         public Screening screening;
-        protected int codMedic;
+        public int codMedic;
         public int[] codPatient = new int[100];
 
         #endregion
@@ -96,7 +96,7 @@ namespace Hospital
 
         public override string ToString()
         {
-            return String.Format("{0} - {1} - {2} - {3} - {4}", this.idSyntomns, this.description, this.screening, this.codMedic);
+            return String.Format("{0} - {1} - {2} - {3} ", this.idSyntomns, this.description, this.screening, this.codMedic);
         }
 
         public void PrintArray(int[] codPatient)
