@@ -23,11 +23,8 @@ namespace Hospital
     {
         #region Member Variables
 
-        protected int id;
-        protected int countSyntomns;
-        protected int syntomns;
+        protected int idPatient;
         protected bool attended;
-        protected Screening screening;
 
 
         #endregion
@@ -36,8 +33,7 @@ namespace Hospital
 
         public Patient()
         {
-            id = 0;
-            countSyntomns = 0;
+            idPatient = 0;
             attended = false;
 
 
@@ -45,24 +41,22 @@ namespace Hospital
             contact = "";
             birthday = "0/0/0000";
             gender = 0;
-            screening = 0;
         }
 
 
-        public Patient(int id, int countSyntomns, bool attended, string name, string contact, string birthday, Gender gender, Screening screening)
+        public Patient(bool attended, string name, string contact, string birthday, Gender gender)
         {
-            this.id = GetNextID();
-            this.countSyntomns = countSyntomns;
+            this.idPatient = GetNextID();
             this.attended = attended;
 
 
 
 
-            this.name = name;
-            this.contact = contact;
-            this.birthday = birthday;
-            this.gender = gender;
-            this.screening = screening;
+            base.name = name;
+            base.contact = contact;
+            base.birthday = birthday;
+            base.gender = gender;
+            
         }
 
 
@@ -71,12 +65,10 @@ namespace Hospital
 
         #region Properties
 
-        protected int CountSyntomns { get=> countSyntomns; set => countSyntomns = value; }
 
         protected bool Attended { get=> attended; set=> attended = value; }
 
-        protected int Id { get=> id; set=> id = value; }
-
+        protected int Id { get=> idPatient; set=> idPatient = value; }
 
         #endregion
 
@@ -92,15 +84,6 @@ namespace Hospital
         #endregion
 
         #region Enums
-
-        public enum Screening
-        {
-            NU,
-            LU,
-            U,
-            VU,
-            E
-        }
 
         #endregion
     }

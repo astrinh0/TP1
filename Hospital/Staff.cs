@@ -23,7 +23,7 @@ namespace Hospital
     {
         #region Member Variables
 
-        protected int id;
+        protected int idStaff;
         protected string job;
 
         #endregion
@@ -32,7 +32,10 @@ namespace Hospital
 
         public Staff()
         {
-            id = 0;
+            idStaff = 0;
+            job = "";
+
+
             name = "";
             contact = "";
             birthday = "0/0/0000";
@@ -40,18 +43,18 @@ namespace Hospital
         }
 
 
-        public Staff(int id, string job, string name, string contact, string birthday, Gender gender)
+        public Staff(string job, string name, string contact, string birthday, Gender gender)
         {
-            this.id = GetNextID();
+            this.idStaff = GetNextID();
             this.job = job;
 
 
 
 
-            this.name = name;
-            this.contact = contact;
-            this.birthday = birthday;
-            this.gender = gender;
+            base.name = name;
+            base.contact = contact;
+            base.birthday = birthday;
+            base.gender = gender;
 
         }
 
@@ -63,11 +66,11 @@ namespace Hospital
         {
             get
             {
-                return id;
+                return idStaff;
             }
             set
             {
-                this.id = value;
+                this.idStaff = value;
             }
 
         }
