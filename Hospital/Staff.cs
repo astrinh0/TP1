@@ -23,8 +23,9 @@ namespace Hospital
     {
         #region Member Variables
 
-        protected int idStaff;
+        public int idStaff;
         protected string job;
+
 
         #endregion
 
@@ -38,16 +39,16 @@ namespace Hospital
 
             name = "";
             contact = "";
-            birthday = "0/0/0000";
+            birthday = DateTime.Today;
             gender = 0;
         }
 
 
-        public Staff(string job, string name, string contact, string birthday, Gender gender)
+        public Staff(string job, string name, string contact, DateTime birthday, Gender gender)
         {
             this.idStaff = GetNextID();
             this.job = job;
-
+ 
 
 
 
@@ -96,6 +97,11 @@ namespace Hospital
         protected int GetNextID()
         {
             return ++Id;
+        }
+
+        public override string ToString()
+        {
+            return String.Format("{0} - {1} - {2} - {3} - {4} - {5}", this.idStaff, this.job, this.name, this.contact, this.birthday, this.gender);
         }
 
 

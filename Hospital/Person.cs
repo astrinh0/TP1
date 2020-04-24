@@ -25,7 +25,7 @@ namespace Hospital
 
         protected string name;
         protected string contact;
-        public string birthday;
+        public DateTime birthday;
         public Gender gender;
 
         #endregion
@@ -36,13 +36,13 @@ namespace Hospital
         {
             name = "";
             contact = "";
-            birthday = "0/0/0000";
+            birthday = DateTime.Today;
             gender = 0;
 
         }
 
 
-        public Person(string name, string contact, string birthday, Gender gender)
+        public Person(string name, string contact, DateTime birthday, Gender gender)
         {
             this.name = name;
             this.contact = contact;

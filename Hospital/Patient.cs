@@ -23,8 +23,8 @@ namespace Hospital
     {
         #region Member Variables
 
-        protected int idPatient;
-        protected bool attended;
+        public int idPatient;
+        protected Attended attended;
 
 
         #endregion
@@ -34,20 +34,20 @@ namespace Hospital
         public Patient()
         {
             idPatient = 0;
-            attended = false;
+            attended = Attended.No;
 
 
             name = "";
             contact = "";
-            birthday = "0/0/0000";
+            birthday = DateTime.Today;
             gender = 0;
         }
 
 
-        public Patient(bool attended, string name, string contact, string birthday, Gender gender)
+        public Patient(Attended attended, string name, string contact, DateTime birthday, Gender gender)
         {
             this.idPatient = GetNextID();
-            this.attended = attended;
+            this.attended = Attended.No;
 
 
 
@@ -66,7 +66,7 @@ namespace Hospital
         #region Properties
 
 
-        protected bool Attended { get=> attended; set=> attended = value; }
+        protected Attended GetAttended { get=> attended; set=> attended = value; }
 
         protected int Id { get=> idPatient; set=> idPatient = value; }
 
@@ -75,15 +75,28 @@ namespace Hospital
         #region Functions
 
 
+
         protected int GetNextID()
         {
             return ++Id;
         }
 
+        public override string ToString()
+        {
+            return String.Format("{0} - {1} - {2} - {3} - {4} - {5}", this.idPatient, this.attended, this.name, this.contact, this.birthday, this.gender);
+        }
+
+
 
         #endregion
 
         #region Enums
+
+        public enum Attended
+        {
+            No,
+            Yes
+        }
 
         #endregion
     }

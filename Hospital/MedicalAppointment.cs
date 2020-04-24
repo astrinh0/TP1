@@ -25,8 +25,8 @@ namespace Hospital
 
         public int idMedicalAppointment;
         public string typeOfMedical;
-        public Staff medic;
-        public Patient[] patient;
+        public int codMedic;
+        public int codPatient;
 
 
 
@@ -38,20 +38,17 @@ namespace Hospital
         {
             idMedicalAppointment = 0;
             typeOfMedical = "";
-
-
-
-            medic = new Staff();
-            patient = new Patient[0];
+            codMedic = 0;
+            codPatient = 0;
         }
 
-        public MedicalAppointment(string typeOfMedical, Staff medic, Patient[] patient)
+        public MedicalAppointment(string typeOfMedical, int codMedic, int codPatient)
         {
             this.idMedicalAppointment = GetNextID();
             this.typeOfMedical = typeOfMedical;
 
-            this.medic = medic;
-            this.patient = patient;
+            this.codMedic = codMedic;
+            this.codPatient = codPatient;
 
         }
 
@@ -70,6 +67,9 @@ namespace Hospital
         {
             return ++this.idMedicalAppointment;
         }
+
+
+
 
 
         #endregion
