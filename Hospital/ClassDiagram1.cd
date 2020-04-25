@@ -1,45 +1,52 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1">
   <Class Name="Hospital.MedicalAppointment" Collapsed="true">
-    <Position X="6.5" Y="1.25" Width="1.5" />
+    <Position X="5.25" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAJCAAAAAAAABAAAAAEAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAACAAAAAAAABAEAAAEAAAAAEAAgAAAAAAAAAAAAAA=</HashCode>
       <FileName>MedicalAppointment.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Hospital.Patient" Collapsed="true">
-    <Position X="1.75" Y="2.5" Width="1.5" />
+    <Position X="0.5" Y="1.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAiAAAAIAAAABAAAAAAAACAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAACAAAAIAAAABAAAAAABACAAAAAAAAAgAAAAAAAAEA=</HashCode>
       <FileName>Patient.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Hospital.Person" Collapsed="true">
-    <Position X="3" Y="1.25" Width="1.5" />
+    <Position X="1.75" Y="0.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAACAAAgAwAAAAEAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Person.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Hospital.Program" Collapsed="true">
-    <Position X="8.25" Y="1.25" Width="1.5" />
+    <Position X="7" Y="0.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAA=</HashCode>
       <FileName>Program.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Hospital.Staff" Collapsed="true">
-    <Position X="4" Y="2.5" Width="1.5" />
+    <Position X="2.75" Y="1.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAACAAQAAAAAABAAAAAAAAIAAAACAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Staff.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Hospital.Syntomns" Collapsed="true">
-    <Position X="6.5" Y="2.25" Width="1.5" />
+    <Position X="5.25" Y="1.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAJAAAAAAAAABAAIAAAAAAAAAAAIAAAAAAAAAAACAg=</HashCode>
+      <HashCode>AAAAACAAAAAAABAAIAAAAAAAAEAAoAAAAAAAAAAAAAg=</HashCode>
       <FileName>Syntomns.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Hospital.Urgency" Collapsed="true">
+    <Position X="7" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAABAgAABACAABAAAgAAAAAQAAAEAAAAAAIAEEAAgAA=</HashCode>
+      <FileName>Urgency.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Font Name="Segoe UI" Size="9" />

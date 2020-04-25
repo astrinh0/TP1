@@ -19,6 +19,9 @@ using System.Threading.Tasks;
 
 namespace Hospital
 {
+    /// <summary>
+    /// Classe das consultas
+    /// </summary>
     class MedicalAppointment
     {
         #region Member Variables
@@ -33,7 +36,9 @@ namespace Hospital
         #endregion
 
         #region Constructors
-
+        /// <summary>
+        /// Construtor por defeito.
+        /// </summary>
         public MedicalAppointment()
         {
             idMedicalAppointment = 0;
@@ -42,6 +47,13 @@ namespace Hospital
             codPatient = 0;
         }
 
+
+        /// <summary>
+        /// Construtor com parametros
+        /// </summary>
+        /// <param name="typeOfMedical"></param>
+        /// <param name="codMedic"></param>
+        /// <param name="codPatient"></param>
         public MedicalAppointment(string typeOfMedical, int codMedic, int codPatient)
         {
             this.idMedicalAppointment = GetNextID();
@@ -63,12 +75,25 @@ namespace Hospital
 
         #region Functions
 
+
+        /// <summary>
+        /// Funcao de gerar ID automatico
+        /// </summary>
+        /// <returns></returns>
         public int GetNextID()
         {
             return ++this.idMedicalAppointment;
         }
 
 
+        /// <summary>
+        /// Funcao que imprime a classe.
+        /// </summary>
+        /// <returns></returns>
+        public override string ToString()
+        {
+            return $"{this.idMedicalAppointment} - {this.typeOfMedical} - {this.codMedic} - {this.codPatient}";
+        }
 
 
 

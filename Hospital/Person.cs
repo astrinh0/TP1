@@ -21,6 +21,9 @@ namespace Hospital
 {
     class Person
     {
+        /// <summary>
+        /// Classe pai de pessoas.
+        /// </summary>
         #region Member Variables
 
         protected string name;
@@ -31,7 +34,9 @@ namespace Hospital
         #endregion
 
         #region Constructors
-
+        /// <summary>
+        /// Construtor por defeito
+        /// </summary>
         public Person()
         {
             name = "";
@@ -41,7 +46,13 @@ namespace Hospital
 
         }
 
-
+        /// <summary>
+        /// Construtor com parametros
+        /// </summary>
+        /// <param name="name"></param>
+        /// <param name="contact"></param>
+        /// <param name="birthday"></param>
+        /// <param name="gender"></param>
         public Person(string name, string contact, DateTime birthday, Gender gender)
         {
             this.name = name;
@@ -56,6 +67,10 @@ namespace Hospital
         #endregion
 
         #region Properties
+
+        /// <summary>
+        /// Propriedades para aceder as variaveis protegidas
+        /// </summary>
         public string Name
         {
             get
@@ -89,6 +104,11 @@ namespace Hospital
         #endregion
 
         #region Enums
+
+
+        /// <summary>
+        /// Enumerado para o sexo de pessoa
+        /// </summary>
         public enum Gender
         {
             ND,

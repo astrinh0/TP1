@@ -19,6 +19,10 @@ using System.Threading.Tasks;
 
 namespace Hospital
 {
+
+    /// <summary>
+    /// Classe de Staff que herda de Pessoa.
+    /// </summary>
     class Staff : Person
     {
         #region Member Variables
@@ -31,6 +35,9 @@ namespace Hospital
 
         #region Constructors
 
+        /// <summary>
+        /// Construtor por defeito
+        /// </summary>
         public Staff()
         {
             idStaff = 0;
@@ -43,7 +50,14 @@ namespace Hospital
             gender = 0;
         }
 
-
+        /// <summary>
+        /// Construtor com parametros
+        /// </summary>
+        /// <param name="job"></param>
+        /// <param name="name"></param>
+        /// <param name="contact"></param>
+        /// <param name="birthday"></param>
+        /// <param name="gender"></param>
         public Staff(string job, string name, string contact, DateTime birthday, Gender gender)
         {
             this.idStaff = GetNextID();
@@ -59,10 +73,15 @@ namespace Hospital
 
         }
 
+
+
         #endregion
 
         #region Properties
 
+        /// <summary>
+        /// Propriedades para aceder as variaveis protegidas
+        /// </summary>
         protected int Id
         {
             get
@@ -94,14 +113,13 @@ namespace Hospital
 
         #region Functions
 
+        /// <summary>
+        /// funcao que gera automaticamente o ID
+        /// </summary>
+        /// <returns></returns>
         protected int GetNextID()
         {
             return ++Id;
-        }
-
-        public override string ToString()
-        {
-            return String.Format("{0} - {1} - {2} - {3} - {4} - {5}", this.idStaff, this.job, this.name, this.contact, this.birthday, this.gender);
         }
 
 

@@ -21,26 +21,35 @@ namespace Hospital
     {
         static void Main()
         {
+            /// Zona de testes
 
-            Staff medic = new Staff("Oncologist",
-                                    "Paul",
-                                    "919211233",
-                                    new DateTime(1993, 02, 23),
-                                    Person.Gender.M);
-            Console.WriteLine(medic.ToString());
-
-            Patient paciente = new Patient(Patient.Attended.No, "Fernando", "213123123", new DateTime(1990, 02, 13), Person.Gender.M);
-            Console.WriteLine(paciente.ToString());
+            Urgency u = new Urgency();
+            MedicalAppointment[] consultas = new MedicalAppointment[100];
             
 
-            Syntomns syntomns = new Syntomns("Cancer", Syntomns.Screening.E, medic.idStaff);
-            Console.WriteLine(syntomns.ToString());
-            syntomns.AddCodPatient(syntomns, paciente.idPatient);
-            syntomns.PrintArray(syntomns.codPatient);
+            Patient patient = new Patient(Patient.Attended.No, "Fernando", "213123123", new DateTime(1990, 02, 13), Person.Gender.M, 1);
+            u.AddPatientToUrgency(u, patient);
+
+            
+
+            Staff medic = new Staff("Oncologist", "Paul", "919211233", new DateTime(1993, 02, 23), Person.Gender.M);
+            u.AddMedictToUrgency(u, medic);
+            
+            Syntomns syntomn = new Syntomns("Cancer", Syntomns.Screening.E, u.medics[0].idStaff);
+            u.AddSyntomnsToUrgency(u, syntomn);
+
+            consultas[0] = new MedicalAppointment("Consulta de rotina", u.medics[0].idStaff, u.patients[0].idPatient);
+
+            u.PrintAllMedics(u.medics);
+            Console.ReadKey();
+            u.PrintAllPatients(u.patients);
+            Console.ReadKey();
+            u.PrintAllSyntomns(u.syntomns);
             Console.ReadKey();
 
 
-            MedicalAppointment consulta = new MedicalAppointment("Consulta de Oncologia", medic.idStaff, paciente.idPatient);
+
+            Console.ReadKey();
 
 
            

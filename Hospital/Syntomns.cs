@@ -19,6 +19,10 @@ using System.Threading.Tasks;
 
 namespace Hospital
 {
+
+    /// <summary>
+    /// Classe dos Sintomas
+    /// </summary>
     class Syntomns
     {
         #region Member Variables
@@ -27,12 +31,15 @@ namespace Hospital
         public string description;
         public Screening screening;
         public int codMedic;
-        public int[] codPatient = new int[100];
+        public int[] codPatient;
 
         #endregion
 
         #region Constructors
 
+        /// <summary>
+        /// Construtor por defeito
+        /// </summary>
         public Syntomns()
         {
             idSyntomns = 0;
@@ -40,9 +47,19 @@ namespace Hospital
             screening = Screening.NU;
 
 
-            codMedic = 0; 
-            codPatient[0] = 0;
+            codMedic = 0;
+
+            codPatient = new int[100];
+            
         }
+
+
+        /// <summary>
+        /// Construtor com parametros
+        /// </summary>
+        /// <param name="description"></param>
+        /// <param name="screening"></param>
+        /// <param name="codMedic"></param>
 
         public Syntomns(string description, Screening screening, int codMedic)
         {
@@ -71,21 +88,11 @@ namespace Hospital
         #region Functions
 
 
-        
 
-
-
-        public void AddCodPatient(Syntomns syntomns, int codPatient)
-        {
-            for (int i = 0; i < syntomns.codPatient.Length; i++)
-            {
-                if (syntomns.codPatient[i] == 0)
-                {
-                    syntomns.codPatient[i] = codPatient;
-                    break;
-                }
-            }
-        }
+        /// <summary>
+        /// funcao que gera automaticamente o ID
+        /// </summary>
+        /// <returns></returns>
 
 
         public int GetNextID()
@@ -94,19 +101,6 @@ namespace Hospital
         }
 
 
-        public override string ToString()
-        {
-            return String.Format("{0} - {1} - {2} - {3} ", this.idSyntomns, this.description, this.screening, this.codMedic);
-        }
-
-        public void PrintArray(int[] codPatient)
-        {
-            foreach (int i in codPatient)
-            {
-                Console.WriteLine("The list of patients is: {0}", i);
-            }
-
-        }
 
 
         #endregion
