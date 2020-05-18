@@ -46,6 +46,13 @@ namespace HospitalBarcelos
             this.medicalAppointments = new List<MedicalAppointment>();
 
         }
+        /// <summary>
+        /// Construtor por parametros
+        /// </summary>
+        /// <param name="urgency"></param>
+        /// <param name="patient"></param>
+        /// <param name="medic"></param>
+        /// <param name="medicalAppointment"></param>
         
         public Urgency(Urgency urgency, Patient patient, Staff medic, MedicalAppointment medicalAppointment)
         {
