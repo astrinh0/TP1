@@ -1,9 +1,9 @@
 ﻿/*
  * 
- * <copyright file = "Person"   Developer: João Veloso </copyright>
+ * <copyright file = "Staff"   Developer: João Veloso </copyright>
  * <author>jngveloso</author>
  * <email>jngveloso@gmail.com</email>
- * <date>4/24/2020 12:57:45 PM</date>
+ * <date>4/24/2020 1:39:22 PM</date>
  * <description></description>
  * 
  */
@@ -17,48 +17,64 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Hospital
+namespace HospitalBarcelos
 {
-    class Person
+
+    /// <summary>
+    /// Classe de Staff que herda de Pessoa.
+    /// </summary>
+    public class Staff : Person
     {
-        /// <summary>
-        /// Classe pai de pessoas.
-        /// </summary>
         #region Member Variables
 
-        protected string name;
-        protected string contact;
-        public DateTime birthday;
-        public Gender gender;
+        public int idStaff;
+        public string job;
+        public Working working; 
+
+
+
 
         #endregion
 
         #region Constructors
+
         /// <summary>
         /// Construtor por defeito
         /// </summary>
-        public Person()
+        public Staff()
         {
+            idStaff = 0;
+            job = "";
+
+
             name = "";
             contact = "";
             birthday = DateTime.Today;
             gender = 0;
-
+            working = Working.N;
         }
 
         /// <summary>
         /// Construtor com parametros
         /// </summary>
+        /// <param name="job"></param>
         /// <param name="name"></param>
         /// <param name="contact"></param>
         /// <param name="birthday"></param>
         /// <param name="gender"></param>
-        public Person(string name, string contact, DateTime birthday, Gender gender)
+        public Staff(string job, string name, string contact, DateTime birthday, Gender gender, Working working)
         {
-            this.name = name;
-            this.contact = contact;
-            this.birthday = birthday;
-            this.gender = gender;
+            this.idStaff = GetNextID();
+            this.job = job;
+            this.working = working;
+ 
+
+
+
+            base.name = name;
+            base.contact = contact;
+            base.birthday = birthday;
+            base.gender = gender;
 
         }
 
@@ -71,51 +87,56 @@ namespace Hospital
         /// <summary>
         /// Propriedades para aceder as variaveis protegidas
         /// </summary>
-        public string Name
+        protected int Id
         {
             get
             {
-                return name;
+                return idStaff;
             }
             set
             {
-                this.name = value;
+                this.idStaff = value;
             }
+
         }
 
-
-
-        public string Contact
+        protected string Job
         {
             get
             {
-                return contact;
+                return job;
             }
             set
             {
-                this.contact = value;
+                this.job = value;
             }
+
         }
+
 
         #endregion
 
         #region Functions
 
+        /// <summary>
+        /// funcao que gera automaticamente o ID
+        /// </summary>
+        /// <returns></returns>
+        protected int GetNextID()
+        {
+            return ++Id;
+        }
+
+
         #endregion
 
         #region Enums
 
-
-        /// <summary>
-        /// Enumerado para o sexo de pessoa
-        /// </summary>
-        public enum Gender
+        public enum Working
         {
-            ND,
-            M,
-            F
+            N,
+            Y
         }
-
         #endregion
     }
 }

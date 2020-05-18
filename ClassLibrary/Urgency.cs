@@ -17,18 +17,19 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Hospital
+namespace HospitalBarcelos
 {
     /// <summary>
     /// Classe que organiza todas as classes, 
     /// defini esta classe para definir os arrays que precisava e que estao ligados
     /// </summary>
-    class Urgency
+    public class Urgency
     {
         #region Member Variables
-        public Patient[] patients;
-        public Syntomns[] syntomns;
-        public Staff[] medics;
+        List<Patient> patients = new List<Patient>();
+        List<Staff> medics = new List<Staff>();
+        List<MedicalAppointment> medicalappointments = new List<MedicalAppointment>();
+
 
 
         #endregion
@@ -40,9 +41,7 @@ namespace Hospital
         /// </summary>
         public Urgency()
         {
-            patients = new Patient[100];
-            syntomns = new Syntomns[100];
-            medics = new Staff[100];
+            
         }
 
         
@@ -72,7 +71,7 @@ namespace Hospital
             return null;
         }
 
-        public Syntomns FindSyntomnById(Urgency urgency, int idSyntomn)
+        /*public Syntomns FindSyntomnById(Urgency urgency, int idSyntomn)
         {
             foreach (var syntomn in urgency.syntomns)
             {
@@ -82,7 +81,7 @@ namespace Hospital
                 }
             }
             return null;
-        }
+        }*/
 
         public Staff FindMedicById(Urgency urgency, int idStaff)
         {
@@ -102,16 +101,9 @@ namespace Hospital
         /// <param name="urgency"></param>
         /// <param name="patient"></param>
         /// <returns></returns>
-        internal Patient AddPatientToUrgency(Urgency urgency, Patient patient)
+        internal Patient AddPatientToUrgency(List<Urgency> urgency, Patient patient)
         {
-            for (int i = 0; i < urgency.patients.Length; i++)
-            {
-                if (urgency.patients[i] == null)
-                {
-                    urgency.patients[i] = patient;
-                    return patient;
-                }
-            }
+            
 
             return null;
         }
@@ -119,19 +111,12 @@ namespace Hospital
 
         internal Staff AddMedictToUrgency(Urgency urgency, Staff medic)
         {
-            for (int i = 0; i < urgency.medics.Length; i++)
-            {
-                if (urgency.medics[i] == null)
-                {
-                    urgency.medics[i] = medic;
-                    return medic;
-                }
-            }
+            
 
             return null;
         }
 
-        internal Syntomns AddSyntomnsToUrgency(Urgency urgency, Syntomns syntomn)
+       /* internal Syntomns AddSyntomnsToUrgency(Urgency urgency, Syntomns syntomn)
         {
             for (int i = 0; i < urgency.syntomns.Length; i++)
             {
@@ -143,7 +128,7 @@ namespace Hospital
             }
 
             return null;
-        }
+        }*/
 
 
         /// <summary>
@@ -169,25 +154,14 @@ namespace Hospital
             {
                 if (patients[i] != null)
                 {
-                    Console.WriteLine("{0} - {1} - {2} - {3} - {4} - {5}", patients[i].idPatient, patients[i].gender, patients[i].birthday, patients[i].Name, patients[i].Contact, patients[i].countSyntomns);
+                    Console.WriteLine("{0} - {1} - {2} - {3} - {4} - {5}", patients[i].idPatient, patients[i].gender, patients[i].birthday, patients[i].Name, patients[i].Contact, patients[i].decease);
                 }
 
             }
 
         }
 
-        public void PrintAllSyntomns(Syntomns[] syntomns)
-        {
-            for (int i = 0; i < syntomns.Length; i++)
-            {
-                if (syntomns[i] != null)
-                {
-                    Console.WriteLine("{0} - {1} - {2} - {3}", syntomns[i].idSyntomns, syntomns[i].codMedic, syntomns[i].description, syntomns[i].screening);
-                }
-
-            }
-
-        }
+    
 
 
         

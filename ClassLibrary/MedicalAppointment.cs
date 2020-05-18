@@ -17,12 +17,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Hospital
+namespace HospitalBarcelos
 {
     /// <summary>
     /// Classe das consultas
     /// </summary>
-    class MedicalAppointment
+    public class MedicalAppointment
     {
         #region Member Variables
 

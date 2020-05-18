@@ -14,22 +14,26 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Hospital
+namespace HospitalBarcelos
 {
     /// <summary>
     /// Classe de Paciente que herda de Pessoa
     /// </summary>
-    class Patient : Person
+    public class Patient : Person
     {
         #region Member Variables
 
         public int idPatient;
         protected Attended attended;
-        public int[] codSyntomns;
-        public int countSyntomns;
+        public string decease;
+        public Screening screening;
+        public DateTime entrance;
+        public DateTime leave;
+        
 
 
         #endregion
@@ -48,9 +52,9 @@ namespace Hospital
             name = "";
             contact = "";
             birthday = DateTime.Today;
-            gender = 0;
-            codSyntomns = new int[100];
-            countSyntomns = 0; 
+            gender = Gender.ND;
+            decease = "";
+            screening = Screening.ND;
         }
 
         
@@ -63,11 +67,12 @@ namespace Hospital
         /// <param name="birthday"></param>
         /// <param name="gender"></param>
         /// <param name="countSyntomns"></param>
-        public Patient(Attended attended, string name, string contact, DateTime birthday, Gender gender, int countSyntomns)
+        public Patient(Attended attended, string name, string contact, DateTime birthday, Gender gender, string decease, Screening screening)
         {
             this.idPatient = GetNextID();
             this.attended = Attended.No;
-            this.countSyntomns = countSyntomns;
+            this.decease = decease;
+            this.screening = screening;
 
 
 
@@ -126,6 +131,15 @@ namespace Hospital
         {
             No,
             Yes
+        }
+
+        public enum Screening
+        {
+            ND,
+            R,
+            O,
+            Y,
+            G
         }
 
         #endregion
