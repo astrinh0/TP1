@@ -24,8 +24,14 @@ namespace Hospital
         {
             /// Zona de testes
 
-            List<Urgency> urgency = new List<Urgency>();
+            Urgency urgency = new Urgency();
+            Patient patient = new Patient();
+            Staff medic = new Staff();
+            MedicalAppointment medicalAppointment = new MedicalAppointment();
 
+            urgency.patients.Add(patient);
+            urgency.medics.Add(medic);
+            urgency.medicalAppointments.Add(medicalAppointment);
 
 
 

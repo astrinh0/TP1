@@ -26,9 +26,9 @@ namespace HospitalBarcelos
     public class Urgency
     {
         #region Member Variables
-        List<Patient> patients = new List<Patient>();
-        List<Staff> medics = new List<Staff>();
-        List<MedicalAppointment> medicalappointments = new List<MedicalAppointment>();
+        public List<Patient> patients;
+        public List<Staff> medics = new List<Staff>();
+        public List<MedicalAppointment> medicalAppointments = new List<MedicalAppointment>();
 
 
 
@@ -41,10 +41,24 @@ namespace HospitalBarcelos
         /// </summary>
         public Urgency()
         {
-            
+            this.patients = new List<Patient>();
+            this.medics = new List<Staff>();
+            this.medicalAppointments = new List<MedicalAppointment>();
+
+        }
+        
+        public Urgency(Urgency urgency, Patient patient, Staff medic, MedicalAppointment medicalAppointment)
+        {
+            urgency.patients.Add(patient);
+            urgency.medics.Add(medic);
+            urgency.medicalAppointments.Add(medicalAppointment);
+
+
         }
 
         
+
+
         #endregion
 
         #region Properties
