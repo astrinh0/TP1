@@ -28,6 +28,7 @@ namespace HospitalBarcelos
 
         protected string name;
         protected string contact;
+        protected string address;
         public DateTime birthday;
         public Gender gender;
 
@@ -94,6 +95,18 @@ namespace HospitalBarcelos
             set
             {
                 this.contact = value;
+            }
+        }
+
+        public string Address
+        {
+            get
+            {
+                return address;
+            }
+            set
+            {
+                this.address = value;
             }
         }
 

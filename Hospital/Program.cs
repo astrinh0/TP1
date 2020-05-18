@@ -29,8 +29,10 @@ namespace Hospital
             Staff medic = new Staff();
             MedicalAppointment medicalAppointment = new MedicalAppointment();
 
+          
+
             urgency.patients.Add(patient);
-            urgency.medics.Add(medic);
+            urgency.staff.Add(medic);
             urgency.medicalAppointments.Add(medicalAppointment);
 
 

@@ -27,7 +27,7 @@ namespace HospitalBarcelos
     {
         #region Member Variables
         public List<Patient> patients;
-        public List<Staff> medics = new List<Staff>();
+        public List<Staff> staff = new List<Staff>();
         public List<MedicalAppointment> medicalAppointments = new List<MedicalAppointment>();
 
 
@@ -42,7 +42,7 @@ namespace HospitalBarcelos
         public Urgency()
         {
             this.patients = new List<Patient>();
-            this.medics = new List<Staff>();
+            this.staff = new List<Staff>();
             this.medicalAppointments = new List<MedicalAppointment>();
 
         }
@@ -57,7 +57,7 @@ namespace HospitalBarcelos
         public Urgency(Urgency urgency, Patient patient, Staff medic, MedicalAppointment medicalAppointment)
         {
             urgency.patients.Add(patient);
-            urgency.medics.Add(medic);
+            urgency.staff.Add(medic);
             urgency.medicalAppointments.Add(medicalAppointment);
 
 
@@ -92,21 +92,11 @@ namespace HospitalBarcelos
             return null;
         }
 
-        /*public Syntomns FindSyntomnById(Urgency urgency, int idSyntomn)
-        {
-            foreach (var syntomn in urgency.syntomns)
-            {
-                if (syntomn != null && syntomn.idSyntomns == idSyntomn)
-                {
-                    return syntomn;
-                }
-            }
-            return null;
-        }*/
+        
 
         public Staff FindMedicById(Urgency urgency, int idStaff)
         {
-            foreach (var medic in urgency.medics)
+            foreach (var medic in urgency.staff)
             {
                 if (medic != null && medic.idStaff == idStaff)
                 {
@@ -116,40 +106,30 @@ namespace HospitalBarcelos
             return null;
         }
 
+        public MedicalAppointment FindMedicalAppointmentById(Urgency urgency, int idMedicalAppointment)
+        {
+            foreach (var medicalAppointment in urgency.medicalAppointments)
+            {
+                if (medicalAppointment != null && medicalAppointment.idMedicalAppointment == idMedicalAppointment)
+                {
+                    return medicalAppointment;
+                }
+            }
+            return null;
+        }
+
+
+
+
         /// <summary>
         /// Adiciona no array respectivo, caso nao consiga devolve null.
         /// </summary>
         /// <param name="urgency"></param>
         /// <param name="patient"></param>
         /// <returns></returns>
-        internal Patient AddPatientToUrgency(List<Urgency> urgency, Patient patient)
-        {
-            
+        
 
-            return null;
-        }
-
-
-        internal Staff AddMedictToUrgency(Urgency urgency, Staff medic)
-        {
-            
-
-            return null;
-        }
-
-       /* internal Syntomns AddSyntomnsToUrgency(Urgency urgency, Syntomns syntomn)
-        {
-            for (int i = 0; i < urgency.syntomns.Length; i++)
-            {
-                if (urgency.syntomns[i] == null)
-                {
-                    urgency.syntomns[i] = syntomn;
-                    return urgency.syntomns[i];
-                }
-            }
-
-            return null;
-        }*/
+       
 
 
         /// <summary>
