@@ -47,14 +47,16 @@ namespace HospitalBarcelos
         {
             idPatient = 0;
             attended = Attended.No;
-
-
-            name = "";
-            contact = "";
-            birthday = DateTime.Today;
-            gender = Gender.ND;
             decease = "";
             screening = Screening.ND;
+
+
+            Name = "";
+            contact = "";
+            Birthday = DateTime.Today;
+            GenderP = Gender.ND;
+            active = Active.No;
+          
         }
 
         
@@ -70,17 +72,18 @@ namespace HospitalBarcelos
         public Patient(Attended attended, string name, string contact, DateTime birthday, Gender gender, string decease, Screening screening)
         {
             this.idPatient = GetNextID();
-            this.attended = Attended.No;
+            this.attended = attended;
             this.decease = decease;
             this.screening = screening;
 
 
 
 
-            base.name = name;
+            base.Name = name;
             base.contact = contact;
-            base.birthday = birthday;
-            base.gender = gender;
+            base.Birthday = birthday;
+            base.GenderP = gender;
+            base.active = Active.Yes;
 
         }
 

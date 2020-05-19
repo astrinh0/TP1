@@ -15,6 +15,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace HospitalBarcelos
@@ -27,11 +28,11 @@ namespace HospitalBarcelos
     {
         #region Member Variables
 
-        public int idStaff;
-        public string job;
-        public Working working; 
+        private int idStaff;
+        private string job;
+        private Working working; 
 
-
+        private static int globalId;
 
 
         #endregion
@@ -44,14 +45,9 @@ namespace HospitalBarcelos
         public Staff()
         {
             idStaff = 0;
-            job = "";
 
-
-            name = "";
-            contact = "";
-            birthday = DateTime.Today;
-            gender = 0;
-            working = Working.N;
+            
+            
         }
 
         /// <summary>
@@ -62,19 +58,23 @@ namespace HospitalBarcelos
         /// <param name="contact"></param>
         /// <param name="birthday"></param>
         /// <param name="gender"></param>
-        public Staff(string job, string name, string contact, DateTime birthday, Gender gender, Working working)
+        public Staff(string job, string name, string contact, DateTime birthday, Gender gender, Working working, string address, int numberSNS)
         {
-            this.idStaff = GetNextID();
+            this.IdStaff = Interlocked.Increment(ref globalId);
             this.job = job;
             this.working = working;
  
 
 
 
-            base.name = name;
-            base.contact = contact;
-            base.birthday = birthday;
-            base.gender = gender;
+            base.Name = name;
+            base.Contact = contact;
+            base.Birthday = birthday;
+            base.GenderP = gender;
+            base.Address = address;
+            base.GetActive = Active.Yes;
+            base.NumberSNS = numberSNS;
+            
 
         }
 
@@ -87,31 +87,11 @@ namespace HospitalBarcelos
         /// <summary>
         /// Propriedades para aceder as variaveis protegidas
         /// </summary>
-        protected int Id
-        {
-            get
-            {
-                return idStaff;
-            }
-            set
-            {
-                this.idStaff = value;
-            }
+        public int IdStaff { get => idStaff; set => idStaff = value; }
 
-        }
+        public string Job { get => job ; set => job = value; }
 
-        protected string Job
-        {
-            get
-            {
-                return job;
-            }
-            set
-            {
-                this.job = value;
-            }
-
-        }
+        public Working Work { get => working; set => working = value; }
 
 
         #endregion
@@ -122,10 +102,7 @@ namespace HospitalBarcelos
         /// funcao que gera automaticamente o ID
         /// </summary>
         /// <returns></returns>
-        protected int GetNextID()
-        {
-            return ++Id;
-        }
+
 
 
         #endregion

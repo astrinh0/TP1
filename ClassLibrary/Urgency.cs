@@ -14,6 +14,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -26,9 +27,12 @@ namespace HospitalBarcelos
     public class Urgency
     {
         #region Member Variables
-        public List<Patient> patients;
-        public List<Staff> staff = new List<Staff>();
-        public List<MedicalAppointment> medicalAppointments = new List<MedicalAppointment>();
+        
+        private List<Patient> patients = new List<Patient>();
+        private List<Staff> staff = new List<Staff>();
+        private List<MedicalAppointment> medicalAppointments = new List<MedicalAppointment>();
+        private List<Decease> deceases = new List<Decease>();
+
 
 
 
@@ -41,34 +45,36 @@ namespace HospitalBarcelos
         /// </summary>
         public Urgency()
         {
-            this.patients = new List<Patient>();
-            this.staff = new List<Staff>();
-            this.medicalAppointments = new List<MedicalAppointment>();
 
         }
-        /// <summary>
-        /// Construtor por parametros
-        /// </summary>
-        /// <param name="urgency"></param>
-        /// <param name="patient"></param>
-        /// <param name="medic"></param>
-        /// <param name="medicalAppointment"></param>
         
-        public Urgency(Urgency urgency, Patient patient, Staff medic, MedicalAppointment medicalAppointment)
+        
+        public Urgency(Urgency urgency, List<Patient> patients, List<Staff> staff, List<MedicalAppointment> medicalAppointments,List<Decease> deceases)
         {
-            urgency.patients.Add(patient);
-            urgency.staff.Add(medic);
-            urgency.medicalAppointments.Add(medicalAppointment);
 
+            this.patients = patients;
+            this.staff = staff;
+            this.medicalAppointments = medicalAppointments;
+            this.deceases = deceases;
 
         }
 
-        
+
 
 
         #endregion
 
         #region Properties
+
+        public List<Patient> Patients { get => patients; set => patients = value; }
+
+        public List<Staff> Staff { get => staff; set => staff = value; }
+
+        public List<MedicalAppointment> MedicalAppointments { get => medicalAppointments; set => medicalAppointments = value; }
+
+        public List<Decease> Deceases { get => deceases; set => deceases = value; }
+
+
         #endregion
 
         #region Functions
@@ -98,7 +104,7 @@ namespace HospitalBarcelos
         {
             foreach (var medic in urgency.staff)
             {
-                if (medic != null && medic.idStaff == idStaff)
+                if (medic != null && medic.IdStaff == idStaff)
                 {
                     return medic;
                 }
@@ -106,17 +112,7 @@ namespace HospitalBarcelos
             return null;
         }
 
-        public MedicalAppointment FindMedicalAppointmentById(Urgency urgency, int idMedicalAppointment)
-        {
-            foreach (var medicalAppointment in urgency.medicalAppointments)
-            {
-                if (medicalAppointment != null && medicalAppointment.idMedicalAppointment == idMedicalAppointment)
-                {
-                    return medicalAppointment;
-                }
-            }
-            return null;
-        }
+        
 
 
 
@@ -136,17 +132,15 @@ namespace HospitalBarcelos
         /// Imprime o array respectivo!
         /// </summary>
         /// <param name="medics"></param>
-        public void PrintAllMedics(Staff[] medics)
+        public void PrintAllStaff(List<Staff> listStaff)
         {
-            for (int i = 0; i < medics.Length; i++)
+            foreach (var staff in listStaff)
             {
-                if (medics[i] != null)
-                {
-                    Console.WriteLine("{0} - {1} - {2} - {3} - {4}", medics[i].idStaff, medics[i].birthday, medics[i].gender, medics[i].Name, medics[i].Contact);
-                }
-
+                Console.WriteLine("{0} - {1} - {2} - {3} - {4} - {5} - {6} - {7} - {8} - {9}", staff.IdStaff, staff.Name, staff.Job, 
+                                                                    staff.NumberSNS, staff.Work, staff.GenderP, staff.Birthday.ToShortDateString(), 
+                                                                    staff.Contact, staff.Address, staff.GetActive);
             }
-
+              
         }
 
         public void PrintAllPatients(Patient[] patients)
@@ -155,7 +149,7 @@ namespace HospitalBarcelos
             {
                 if (patients[i] != null)
                 {
-                    Console.WriteLine("{0} - {1} - {2} - {3} - {4} - {5}", patients[i].idPatient, patients[i].gender, patients[i].birthday, patients[i].Name, patients[i].Contact, patients[i].decease);
+                    Console.WriteLine("{0} - {1} - {2} - {3} - {4} - {5}", patients[i].idPatient, patients[i].GenderP, patients[i].Birthday.ToShortDateString(), patients[i].Name, patients[i].Contact, patients[i].decease);
                 }
 
             }

@@ -26,10 +26,11 @@ namespace HospitalBarcelos
     {
         #region Member Variables
 
-        public int idMedicalAppointment;
-        public string typeOfMedical;
-        public int codMedic;
-        public int codPatient;
+        private int idMedicalAppointment;
+        private string typeOfMedical;
+        protected private int codStaff;
+        protected private int codPatient;
+        protected DateTime date;
 
 
 
@@ -43,7 +44,7 @@ namespace HospitalBarcelos
         {
             idMedicalAppointment = 0;
             typeOfMedical = "";
-            codMedic = 0;
+            codStaff = 0;
             codPatient = 0;
         }
 
@@ -54,12 +55,12 @@ namespace HospitalBarcelos
         /// <param name="typeOfMedical"></param>
         /// <param name="codMedic"></param>
         /// <param name="codPatient"></param>
-        public MedicalAppointment(string typeOfMedical, int codMedic, int codPatient)
+        public MedicalAppointment(string typeOfMedical, int codStaff, int codPatient)
         {
             this.idMedicalAppointment = GetNextID();
             this.typeOfMedical = typeOfMedical;
 
-            this.codMedic = codMedic;
+            this.codStaff = codStaff;
             this.codPatient = codPatient;
 
         }
@@ -70,6 +71,15 @@ namespace HospitalBarcelos
 
         #region Properties
 
+        public int IdMedicalAppointment  { get => idMedicalAppointment; set => idMedicalAppointment = value; }
+
+        public string TypeOfMedical { get => typeOfMedical; set => typeOfMedical = value; }
+
+        public int CodStaff { get => codStaff; set => codStaff = value; }
+
+        public int CodPatient { get => codPatient; set => codPatient = value; }
+
+        public DateTime Date { get => date; set => date = value; }
 
         #endregion
 
@@ -86,13 +96,28 @@ namespace HospitalBarcelos
         }
 
 
+        public MedicalAppointment FindMedicalAppointmentById(Urgency urgency, int idMedicalAppointment)
+        {
+            foreach (var medicalAppointment in urgency.MedicalAppointments)
+            {
+                if (medicalAppointment != null && medicalAppointment.idMedicalAppointment == idMedicalAppointment)
+                {
+                    return medicalAppointment;
+                }
+            }
+            return null;
+        }
+
+        
+
+
         /// <summary>
         /// Funcao que imprime a classe.
         /// </summary>
         /// <returns></returns>
         public override string ToString()
         {
-            return $"{this.idMedicalAppointment} - {this.typeOfMedical} - {this.codMedic} - {this.codPatient}";
+            return $"{this.idMedicalAppointment} - {this.typeOfMedical} - {this.codStaff} - {this.codPatient}";
         }
 
 
