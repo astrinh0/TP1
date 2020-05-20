@@ -145,10 +145,20 @@ namespace HospitalBarcelos
         
         public bool AddDeceaseToPatient(Patient patient, string decease, Screening screening, int idPatient)
         {
+            var today = DateTime.Today;
+
             if (patient != null && patient.idPatient == idPatient)
             {
                 patient.decease = decease;
-                patient.screening = screening;
+                var aux = today.Year - patient.Birthday.Year;
+                if (aux > 50 && screening != Screening.R)
+                {
+                    patient.screening = screening+1;
+                }
+                else
+                {
+                    patient.screening = screening;
+                }
                 return true;
             }
 
@@ -199,10 +209,10 @@ namespace HospitalBarcelos
         public enum Screening
         {
             ND,
-            R,
-            O,
+            G,
             Y,
-            G
+            O,
+            R
         }
 
         #endregion
