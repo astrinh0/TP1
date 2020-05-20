@@ -163,7 +163,7 @@ namespace HospitalBarcelos
             return false;
         }
 
-        public bool Fired(Staff staff, int idStaff)
+        public bool FiredOrRemoved(Staff staff, int idStaff)
         {
             if (staff != null && staff.IdStaff == idStaff)
             {

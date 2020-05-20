@@ -189,6 +189,17 @@ namespace HospitalBarcelos
         }
 
 
+        public bool RemovePatient(Patient patient, int idPatient)
+        {
+            if (patient != null && patient.idPatient == idPatient)
+            {
+                patient.active = Active.No;
+                return true;
+            }
+
+            return false;
+        }
+
         
 
         #endregion
