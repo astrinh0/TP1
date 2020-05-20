@@ -111,7 +111,7 @@ namespace HospitalBarcelos
         /// função para excepção da data
         /// </summary>
         /// <param name="date"></param>
-        public void ValidDate (string date)
+        public void ValidDateBirthday (string date)
         {
             try
             {
@@ -124,6 +124,7 @@ namespace HospitalBarcelos
             }
             
         }
+
 
 
         #endregion

@@ -15,6 +15,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Sockets;
+using System.Security;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -31,7 +32,7 @@ namespace HospitalBarcelos
         private List<Patient> patients = new List<Patient>();
         private List<Staff> staff = new List<Staff>();
         private List<MedicalAppointment> medicalAppointments = new List<MedicalAppointment>();
-        private List<Decease> deceases = new List<Decease>();
+        
 
 
 
@@ -49,13 +50,13 @@ namespace HospitalBarcelos
         }
         
         
-        public Urgency(Urgency urgency, List<Patient> patients, List<Staff> staff, List<MedicalAppointment> medicalAppointments,List<Decease> deceases)
+        public Urgency(List<Patient> patients, List<Staff> staff, List<MedicalAppointment> medicalAppointments)
         {
 
             this.patients = patients;
             this.staff = staff;
             this.medicalAppointments = medicalAppointments;
-            this.deceases = deceases;
+           
 
         }
 
@@ -72,7 +73,7 @@ namespace HospitalBarcelos
 
         public List<MedicalAppointment> MedicalAppointments { get => medicalAppointments; set => medicalAppointments = value; }
 
-        public List<Decease> Deceases { get => deceases; set => deceases = value; }
+       
 
 
         #endregion
@@ -90,9 +91,9 @@ namespace HospitalBarcelos
         {
             foreach (var patient in urgency.patients)
             {
-                if (patient != null && patient.idPatient == idPatient)
+                if (patient.FindPatientById(patient, idPatient) != null)
                 {
-                    return patient;
+                    return patient.FindPatientById(patient, idPatient);
                 }
             }
             return null;
@@ -104,34 +105,42 @@ namespace HospitalBarcelos
         {
             foreach (var medic in urgency.staff)
             {
-                if (medic != null && medic.IdStaff == idStaff)
+                if (medic.FindStaffById(medic, idStaff) != null)
                 {
-                    return medic;
+                    return medic.FindStaffById(medic, idStaff);
                 }
             }
             return null;
         }
 
+
+        public MedicalAppointment FindMedicalAppointmentByIdinList(Urgency urgency, int idMedicalAppointment)
+        {
+            foreach (var medicalAppointment in urgency.MedicalAppointments)
+            {
+                if (medicalAppointment.FindMedicalAppointmentById(medicalAppointment, idMedicalAppointment) != null)
+                {
+                    return medicalAppointment.FindMedicalAppointmentById(medicalAppointment, idMedicalAppointment);
+                }
+               
+            }
+            return null;
+        }
+
+
+       
         
 
 
-
-
-        /// <summary>
-        /// Adiciona no array respectivo, caso nao consiga devolve null.
-        /// </summary>
-        /// <param name="urgency"></param>
-        /// <param name="patient"></param>
-        /// <returns></returns>
-        
 
        
 
 
-        /// <summary>
-        /// Imprime o array respectivo!
-        /// </summary>
-        /// <param name="medics"></param>
+
+
+
+
+       
         public void PrintAllStaff(List<Staff> listStaff)
         {
             foreach (var staff in listStaff)
@@ -143,23 +152,33 @@ namespace HospitalBarcelos
               
         }
 
-        public void PrintAllPatients(Patient[] patients)
+        public void PrintAllPatient(List<Patient> patients)
         {
-            for (int i = 0; i < patients.Length; i++)
+            foreach (var patient in patients)
             {
-                if (patients[i] != null)
-                {
-                    Console.WriteLine("{0} - {1} - {2} - {3} - {4} - {5}", patients[i].idPatient, patients[i].GenderP, patients[i].Birthday.ToShortDateString(), patients[i].Name, patients[i].Contact, patients[i].decease);
-                }
-
+                Console.WriteLine("{0} - {1} - {2} - {3} - {4} - {5} - {6} - {7} - {8} - {9} - {10} - {11} - {12}", patient.IdPatient, patient.Name, patient.Entrace.ToShortDateString(), patient.Leave.ToShortDateString(), patient.Screen, patient.GetAttended, patient.Decease,
+                                                                    patient.NumberSNS, patient.GenderP, patient.Birthday.ToShortDateString(),
+                                                                    patient.Contact, patient.Address, patient.GetActive);
+                                                                    
             }
 
         }
 
-    
+        public void PrintAllStaff(List<MedicalAppointment> medicalAppointments)
+        {
+            foreach (var medicalAppointment in medicalAppointments)
+            {
+                Console.WriteLine("{0} - {1} - {2} - {3} - {4}", medicalAppointment.IdMedicalAppointment, medicalAppointment.CodPatient, medicalAppointment.CodStaff, medicalAppointment.TypeOfMedical,
+                                                                            medicalAppointment.Date.ToShortDateString());
+            }
+
+        }
 
 
-        
+
+
+
+
 
 
 

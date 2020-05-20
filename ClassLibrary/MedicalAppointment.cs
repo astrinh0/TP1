@@ -15,6 +15,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace HospitalBarcelos
@@ -32,6 +33,8 @@ namespace HospitalBarcelos
         protected private int codPatient;
         protected DateTime date;
 
+        private static int globalID; 
+
 
 
         #endregion
@@ -44,6 +47,7 @@ namespace HospitalBarcelos
         {
             idMedicalAppointment = 0;
             typeOfMedical = "";
+            date = DateTime.UtcNow;
             codStaff = 0;
             codPatient = 0;
         }
@@ -55,10 +59,11 @@ namespace HospitalBarcelos
         /// <param name="typeOfMedical"></param>
         /// <param name="codMedic"></param>
         /// <param name="codPatient"></param>
-        public MedicalAppointment(string typeOfMedical, int codStaff, int codPatient)
+        public MedicalAppointment(string typeOfMedical, int codStaff, int codPatient, DateTime date)
         {
-            this.idMedicalAppointment = GetNextID();
+            this.idMedicalAppointment = Interlocked.Increment(ref globalID);
             this.typeOfMedical = typeOfMedical;
+            this.date = date;
 
             this.codStaff = codStaff;
             this.codPatient = codPatient;
@@ -71,7 +76,7 @@ namespace HospitalBarcelos
 
         #region Properties
 
-        public int IdMedicalAppointment  { get => idMedicalAppointment; set => idMedicalAppointment = value; }
+        public int IdMedicalAppointment { get => idMedicalAppointment; set => idMedicalAppointment = value; }
 
         public string TypeOfMedical { get => typeOfMedical; set => typeOfMedical = value; }
 
@@ -86,29 +91,16 @@ namespace HospitalBarcelos
         #region Functions
 
 
-        /// <summary>
-        /// Funcao de gerar ID automatico
-        /// </summary>
-        /// <returns></returns>
-        public int GetNextID()
+        public MedicalAppointment FindMedicalAppointmentById(MedicalAppointment medicalAppointment, int idMedicalAppointment)
         {
-            return ++this.idMedicalAppointment;
-        }
-
-
-        public MedicalAppointment FindMedicalAppointmentById(Urgency urgency, int idMedicalAppointment)
-        {
-            foreach (var medicalAppointment in urgency.MedicalAppointments)
+            if (medicalAppointment != null && medicalAppointment.idMedicalAppointment == idMedicalAppointment)
             {
-                if (medicalAppointment != null && medicalAppointment.idMedicalAppointment == idMedicalAppointment)
-                {
-                    return medicalAppointment;
-                }
+                return medicalAppointment;
             }
             return null;
         }
 
-        
+
 
 
         /// <summary>
@@ -119,6 +111,8 @@ namespace HospitalBarcelos
         {
             return $"{this.idMedicalAppointment} - {this.typeOfMedical} - {this.codStaff} - {this.codPatient}";
         }
+
+
 
 
 

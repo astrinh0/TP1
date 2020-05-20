@@ -30,7 +30,7 @@ namespace HospitalBarcelos
 
         private int idStaff;
         private string job;
-        private Working working; 
+        private Working working;
 
         private static int globalId;
 
@@ -45,9 +45,15 @@ namespace HospitalBarcelos
         public Staff()
         {
             idStaff = 0;
+            job = "";
+            working = Working.N;
 
-            
-            
+            Name = "";
+            contact = "";
+            Birthday = DateTime.Today;
+            GenderP = Gender.ND;
+            active = Active.No;
+
         }
 
         /// <summary>
@@ -98,10 +104,77 @@ namespace HospitalBarcelos
 
         #region Functions
 
-        /// <summary>
-        /// funcao que gera automaticamente o ID
-        /// </summary>
-        /// <returns></returns>
+        public Staff FindStaffById(Staff staff, int idStaff)
+        {
+            if (staff != null && staff.idStaff == idStaff)
+            {
+                return staff;
+            }
+            return null;
+        }
+
+        public Staff FindStaffByName(Staff staff, string name)
+        {
+            if (staff != null && staff.Name == name)
+            {
+                return staff;
+            }
+            return null;
+        }
+        public Staff ShowActiveStaff(Staff staff)
+        {
+            if (staff != null && staff.active == Active.Yes)
+            {
+                return staff;
+            }
+            return null;
+        }
+
+        public bool ChangeAddress(Staff staff, string address, int idStaff)
+        {
+            if (staff != null && staff.IdStaff == idStaff)
+            {
+                staff.address = address;
+                return true;
+            }
+
+            return false;
+        }
+
+        public bool StartWorking(Staff staff, int idStaff)
+        {
+            if (staff != null && staff.IdStaff == idStaff)
+            {
+                staff.working = Working.Y;
+                return true;
+            }
+
+            return false;
+        }
+
+        public bool LeaveWorking(Staff staff, int idStaff)
+        {
+            if (staff != null && staff.IdStaff == idStaff)
+            {
+                staff.working = Working.N;
+                return true;
+            }
+
+            return false;
+        }
+
+        public bool Fired(Staff staff, int idStaff)
+        {
+            if (staff != null && staff.IdStaff == idStaff)
+            {
+                staff.active = Active.No;
+                return true;
+            }
+
+            return false;
+        }
+
+
 
 
 

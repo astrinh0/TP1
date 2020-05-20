@@ -16,6 +16,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace HospitalBarcelos
@@ -27,12 +28,15 @@ namespace HospitalBarcelos
     {
         #region Member Variables
 
-        public int idPatient;
-        protected Attended attended;
-        public string decease;
-        public Screening screening;
-        public DateTime entrance;
-        public DateTime leave;
+        private int idPatient;
+        private protected Attended attended;
+        private string decease;
+        private Screening screening;
+        private DateTime entrance;
+        private DateTime leave;
+
+        private static int globalID;
+
         
 
 
@@ -49,6 +53,7 @@ namespace HospitalBarcelos
             attended = Attended.No;
             decease = "";
             screening = Screening.ND;
+            entrance = DateTime.Today;
 
 
             Name = "";
@@ -60,29 +65,24 @@ namespace HospitalBarcelos
         }
 
         
-        /// <summary>
-        /// Construtor com parametros
-        /// </summary>
-        /// <param name="attended"></param>
-        /// <param name="name"></param>
-        /// <param name="contact"></param>
-        /// <param name="birthday"></param>
-        /// <param name="gender"></param>
-        /// <param name="countSyntomns"></param>
-        public Patient(Attended attended, string name, string contact, DateTime birthday, Gender gender, string decease, Screening screening)
+       
+        public Patient(Attended attended, string name, string contact, DateTime birthday, Gender gender, string decease, Screening screening, string address, int numberSNS, DateTime entrance)
         {
-            this.idPatient = GetNextID();
+            this.idPatient = Interlocked.Increment(ref globalID);
             this.attended = attended;
             this.decease = decease;
             this.screening = screening;
+            this.entrance = entrance;
 
 
 
 
             base.Name = name;
-            base.contact = contact;
+            base.Contact = contact;
             base.Birthday = birthday;
             base.GenderP = gender;
+            base.Address = address;
+            base.NumberSNS = numberSNS;
             base.active = Active.Yes;
 
         }
@@ -96,30 +96,90 @@ namespace HospitalBarcelos
         /// Propriedades para aceder as variaveis protegidas
         /// </summary>
 
-        protected Attended GetAttended { get => attended; set => attended = value; }
+        
 
-        protected int Id { get => idPatient; set => idPatient = value; }
+        public int IdPatient { get => idPatient; set => idPatient = value; }
+
+
+        public Attended GetAttended { get => attended; set => attended = value; }
+
+        public string Decease { get => decease; set => decease = value; }
+
+        public Screening Screen { get => screening; set => screening = value; }
+
+        public DateTime Entrace { get => entrance; set => entrance = value; }
+
+        public DateTime Leave { get => leave; set => leave = value; }
 
         #endregion
 
         #region Functions
 
-        /// <summary>
-        /// funcao que gera automaticamente o ID
-        /// </summary>
-        /// <returns></returns>
-
-        protected int GetNextID()
+        public Patient FindPatientById(Patient patient, int idPatient)
         {
-            return ++Id;
+            if (patient != null && patient.IdPatient == idPatient)
+            {
+                return patient;
+            }
+            return null;
+        }
+
+        public Patient FindPatientByName(Patient patient, string name)
+        {
+            if (patient != null && patient.Name == name)
+            {
+                return patient;
+            }
+            return null;
+        }
+
+        public Patient ShowActivePatient(Patient patient)
+        {
+            if (patient != null && patient.active == Active.Yes)
+            {
+                return patient;
+            }
+            return null;
+        }
+
+        
+        public bool AddDeceaseToPatient(Patient patient, string decease, Screening screening, int idPatient)
+        {
+            if (patient != null && patient.idPatient == idPatient)
+            {
+                patient.decease = decease;
+                patient.screening = screening;
+                return true;
+            }
+
+            return false;
+        }
+
+        public bool ChangeAddress(Patient patient, string address, int idPatient)
+        {
+            if (patient != null && patient.idPatient == idPatient)
+            {
+                patient.address = address;
+                return true;
+            }
+
+            return false;
+        }
+
+        public bool LeavingHospital(Patient patient, int idPatient, DateTime date)
+        {
+            if (patient != null && patient.idPatient == idPatient)
+            {
+                patient.leave = date;
+                patient.active = Active.No;
+                return true;
+
+            }
+            return false;
         }
 
 
-
-   
-             
-
-
+        
 
         #endregion
 
