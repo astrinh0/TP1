@@ -32,7 +32,7 @@ namespace HospitalBarcelos
         private string job;
         private Working working;
 
-        private static int globalId;
+        private static int globalID;
 
 
         #endregion
@@ -64,9 +64,12 @@ namespace HospitalBarcelos
         /// <param name="contact"></param>
         /// <param name="birthday"></param>
         /// <param name="gender"></param>
+        /// <param name="working"></param>
+        /// <param name="address"></param>
+        /// <param name="numberSNS"></param>
         public Staff(string job, string name, string contact, DateTime birthday, Gender gender, Working working, string address, int numberSNS)
         {
-            this.IdStaff = Interlocked.Increment(ref globalId);
+            this.IdStaff = Interlocked.Increment(ref globalID);
             this.job = job;
             this.working = working;
  
@@ -100,10 +103,49 @@ namespace HospitalBarcelos
         public Working Work { get => working; set => working = value; }
 
 
+
         #endregion
 
         #region Functions
 
+
+        /// <summary>
+        /// cria um novo staff
+        /// </summary>
+        /// <param name="staff"></param>
+        /// <returns></returns>
+        public Staff CreateNewStaff(Staff staff)
+        {
+            this.IdStaff = Interlocked.Increment(ref globalID);
+            Console.WriteLine("Diga o nome:\n");
+            staff.Name = Console.ReadLine();
+            Console.WriteLine("Diga o contacto:\n");
+            staff.Contact = Console.ReadLine();
+            Console.WriteLine("Diga a morada:\n");
+            staff.Address = Console.ReadLine();
+            Console.WriteLine("Diga a sua data de nascimento:\n");
+            staff.Birthday = DateTime.TryParse(Console.ReadLine(), out DateTime aux) ? aux : DateTime.Today;
+            Console.WriteLine("Diga o number de utente:\n");
+            staff.NumberSNS = Convert.ToInt64(Console.ReadLine());
+            Console.WriteLine("Diga o sexo:\n");
+            staff.GenderP = (Staff.Gender)Enum.Parse(typeof(Staff.Gender), Console.ReadLine());
+            Console.WriteLine("Diga o trabalho:\n");
+            staff.Job = Console.ReadLine();
+            Console.WriteLine("Está no turno?(Y)(N)");
+            staff.Work = (Staff.Working)Enum.Parse(typeof(Staff.Working), Console.ReadLine());
+            Console.WriteLine("Data de entrada:\n");
+            staff.GetActive = Staff.Active.Yes;
+
+            return staff;
+
+        }
+
+        /// <summary>
+        /// Encontrar Staff por ID
+        /// </summary>
+        /// <param name="staff"></param>
+        /// <param name="idStaff"></param>
+        /// <returns></returns>
         public Staff FindStaffById(Staff staff, int idStaff)
         {
             if (staff != null && staff.idStaff == idStaff)
@@ -113,6 +155,14 @@ namespace HospitalBarcelos
             return null;
         }
 
+
+
+        /// <summary>
+        /// Encontrar Staff pelo nome
+        /// </summary>
+        /// <param name="staff"></param>
+        /// <param name="name"></param>
+        /// <returns></returns>
         public Staff FindStaffByName(Staff staff, string name)
         {
             if (staff != null && staff.Name == name)
@@ -121,6 +171,12 @@ namespace HospitalBarcelos
             }
             return null;
         }
+
+        /// <summary>
+        /// Mostrar Activos na Urgencia
+        /// </summary>
+        /// <param name="staff"></param>
+        /// <returns></returns>
         public Staff ShowActiveStaff(Staff staff)
         {
             if (staff != null && staff.active == Active.Yes)
@@ -129,6 +185,15 @@ namespace HospitalBarcelos
             }
             return null;
         }
+
+
+        /// <summary>
+        /// Alterar a morada
+        /// </summary>
+        /// <param name="staff"></param>
+        /// <param name="address"></param>
+        /// <param name="idStaff"></param>
+        /// <returns></returns>
 
         public bool ChangeAddress(Staff staff, string address, int idStaff)
         {
@@ -141,6 +206,13 @@ namespace HospitalBarcelos
             return false;
         }
 
+
+        /// <summary>
+        /// Flag para se está no turno
+        /// </summary>
+        /// <param name="staff"></param>
+        /// <param name="idStaff"></param>
+        /// <returns></returns>
         public bool StartWorking(Staff staff, int idStaff)
         {
             if (staff != null && staff.IdStaff == idStaff)
@@ -152,6 +224,13 @@ namespace HospitalBarcelos
             return false;
         }
 
+
+        /// <summary>
+        /// flag para tirar do turno
+        /// </summary>
+        /// <param name="staff"></param>
+        /// <param name="idStaff"></param>
+        /// <returns></returns>
         public bool LeaveWorking(Staff staff, int idStaff)
         {
             if (staff != null && staff.IdStaff == idStaff)
@@ -163,6 +242,13 @@ namespace HospitalBarcelos
             return false;
         }
 
+
+        /// <summary>
+        /// Remover staff
+        /// </summary>
+        /// <param name="staff"></param>
+        /// <param name="idStaff"></param>
+        /// <returns></returns>
         public bool FiredOrRemoved(Staff staff, int idStaff)
         {
             if (staff != null && staff.IdStaff == idStaff)

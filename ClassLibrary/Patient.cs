@@ -15,6 +15,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.InteropServices;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -30,10 +31,11 @@ namespace HospitalBarcelos
 
         private int idPatient;
         private protected Attended attended;
-        private string decease;
+        private string disease;
         private Screening screening;
         private DateTime entrance;
         private DateTime leave;
+
 
         private static int globalID;
 
@@ -51,7 +53,7 @@ namespace HospitalBarcelos
         {
             idPatient = 0;
             attended = Attended.No;
-            decease = "";
+            disease = "";
             screening = Screening.ND;
             entrance = DateTime.Today;
 
@@ -66,12 +68,12 @@ namespace HospitalBarcelos
 
         
        
-        public Patient(Attended attended, string name, string contact, DateTime birthday, Gender gender, string decease, Screening screening, string address, int numberSNS, DateTime entrance)
+        public Patient( string name, string contact, DateTime birthday, Gender gender, string address, int numberSNS, DateTime entrance)
         {
             this.idPatient = Interlocked.Increment(ref globalID);
-            this.attended = attended;
-            this.decease = decease;
-            this.screening = screening;
+            this.attended = Attended.No;
+            this.disease = "";
+            this.screening = Screening.ND;
             this.entrance = entrance;
 
 
@@ -98,12 +100,12 @@ namespace HospitalBarcelos
 
         
 
-        public int IdPatient { get => idPatient; set => idPatient = value; }
+        public int IdPatient { get => idPatient; set => this.idPatient = value; }
 
 
         public Attended GetAttended { get => attended; set => attended = value; }
 
-        public string Decease { get => decease; set => decease = value; }
+        public string Disease { get => disease; set => disease = value; }
 
         public Screening Screen { get => screening; set => screening = value; }
 
@@ -111,9 +113,35 @@ namespace HospitalBarcelos
 
         public DateTime Leave { get => leave; set => leave = value; }
 
+        public int GlobalID { get => globalID; set => globalID = value; }
+
         #endregion
 
         #region Functions
+
+        public Patient CreateNewPatient(Patient patient)
+        {
+            this.idPatient = Interlocked.Increment(ref globalID);
+            Console.WriteLine("Diga o nome:\n");
+            patient.Name = Console.ReadLine();
+            Console.WriteLine("Diga o contacto:\n");
+            patient.Contact = Console.ReadLine();
+            Console.WriteLine("Diga a morada:\n");
+            patient.Address = Console.ReadLine();
+            Console.WriteLine("Diga a sua data de nascimento:\n");
+            patient.Birthday = DateTime.TryParse(Console.ReadLine(), out DateTime aux) ? aux : DateTime.Today;
+            Console.WriteLine("Diga o number de utente:\n");
+            patient.NumberSNS = Convert.ToInt64(Console.ReadLine());
+            Console.WriteLine("Diga o sexo:\n");
+            patient.GenderP = (Patient.Gender)Enum.Parse(typeof(Patient.Gender), Console.ReadLine());
+            Console.WriteLine("Data de entrada:\n");
+            patient.Entrace = DateTime.TryParse(Console.ReadLine(), out DateTime auxEntrance) ? auxEntrance : DateTime.Today;
+            patient.GetActive = Person.Active.Yes;
+
+            return patient;
+
+        }
+
 
         public Patient FindPatientById(Patient patient, int idPatient)
         {
@@ -142,29 +170,8 @@ namespace HospitalBarcelos
             return null;
         }
 
+
         
-        public bool AddDeceaseToPatient(Patient patient, string decease, Screening screening, int idPatient)
-        {
-            var today = DateTime.Today;
-
-            if (patient != null && patient.idPatient == idPatient)
-            {
-                patient.decease = decease;
-                var aux = today.Year - patient.Birthday.Year;
-                if (aux > 50 && screening != Screening.R)
-                {
-                    patient.screening = screening+1;
-                }
-                else
-                {
-                    patient.screening = screening;
-                }
-                return true;
-            }
-
-            return false;
-        }
-
         public bool ChangeAddress(Patient patient, string address, int idPatient)
         {
             if (patient != null && patient.idPatient == idPatient)
@@ -188,12 +195,16 @@ namespace HospitalBarcelos
             return false;
         }
 
+       
+
+
 
         public bool RemovePatient(Patient patient, int idPatient)
         {
             if (patient != null && patient.idPatient == idPatient)
             {
                 patient.active = Active.No;
+                patient.leave = DateTime.Today;
                 return true;
             }
 

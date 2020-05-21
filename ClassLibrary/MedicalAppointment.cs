@@ -57,8 +57,9 @@ namespace HospitalBarcelos
         /// Construtor com parametros
         /// </summary>
         /// <param name="typeOfMedical"></param>
-        /// <param name="codMedic"></param>
+        /// <param name="codStaff"></param>
         /// <param name="codPatient"></param>
+        /// <param name="date"></param>
         public MedicalAppointment(string typeOfMedical, int codStaff, int codPatient, DateTime date)
         {
             this.idMedicalAppointment = Interlocked.Increment(ref globalID);
@@ -91,6 +92,32 @@ namespace HospitalBarcelos
         #region Functions
 
 
+        /// <summary>
+        /// cria nova consulta
+        /// </summary>
+        /// <param name="medicalAppointment"></param>
+        /// <param name="patient"></param>
+        /// <param name="medic"></param>
+        /// <returns></returns>
+
+        public MedicalAppointment CreateNewMedicalAppointment(MedicalAppointment medicalAppointment, Patient patient, Staff medic)
+        {
+            int aux;
+            aux = patient.IdPatient;
+            this.idMedicalAppointment = Interlocked.Increment(ref globalID);
+            Console.WriteLine("Diga o tipo de consulta:\n");
+            medicalAppointment.typeOfMedical = Console.ReadLine();
+            medicalAppointment.codPatient = patient.IdPatient;
+            medicalAppointment.codStaff = medic.IdStaff;
+            patient.Screen = Patient.Screening.ND;
+            patient.GetAttended = Patient.Attended.Yes;
+            patient.RemovePatient(patient, aux);
+
+            
+
+            return medicalAppointment;
+
+        }
         public MedicalAppointment FindMedicalAppointmentById(MedicalAppointment medicalAppointment, int idMedicalAppointment)
         {
             if (medicalAppointment != null && medicalAppointment.idMedicalAppointment == idMedicalAppointment)

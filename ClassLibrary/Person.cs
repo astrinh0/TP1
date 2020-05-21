@@ -27,7 +27,7 @@ namespace HospitalBarcelos
         #region Member Variables
         
         private string name;
-        protected private int numberSNS;
+        protected private long numberSNS;
         protected private string contact;
         protected private string address;
         private DateTime birthday;
@@ -86,7 +86,7 @@ namespace HospitalBarcelos
 
         public string Name { get => name; set => name = value; }
 
-        public int NumberSNS { get => numberSNS; set => numberSNS = value; }
+        public long NumberSNS { get => numberSNS; set => numberSNS = value; }
 
         public string Contact { get => contact; set => contact = value; }
 
@@ -107,23 +107,6 @@ namespace HospitalBarcelos
         #region Functions
 
 
-        /// <summary>
-        /// função para excepção da data
-        /// </summary>
-        /// <param name="date"></param>
-        public void ValidDateBirthday (string date)
-        {
-            try
-            {
-                DateTime.Parse(date);
-            }
-            catch (DateExceptions ex)
-            {
-
-                Console.WriteLine("ERROR : " + ex.Message);
-            }
-            
-        }
 
 
 
