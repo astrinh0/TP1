@@ -28,9 +28,9 @@ namespace HospitalBarcelos
         private List<Staff> staff = new List<Staff>();
         private List<MedicalAppointment> medicalAppointments = new List<MedicalAppointment>();
 
-        private const string PATHPATIENTS = @".\Patients.bin";
-        private const string PATHSTAFF = @".\Staff.bin";
-        private const string PATHMEDICALAPPOINTMENTS = @".\MedicalAppointments.bin";
+        private const string PATHPATIENTS = @"..\..\Patients.bin";
+        private const string PATHSTAFF = @"..\..\Staff.bin";
+        private const string PATHMEDICALAPPOINTMENTS = @"..\..\MedicalAppointments.bin";
 
 
 
