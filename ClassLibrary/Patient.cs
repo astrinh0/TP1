@@ -131,7 +131,7 @@ namespace HospitalBarcelos
             Console.WriteLine("Diga a sua data de nascimento:\n");
             patient.Birthday = DateTime.TryParse(Console.ReadLine(), out DateTime aux) ? aux : DateTime.Today;
             Console.WriteLine("Diga o number de utente:\n");
-            patient.NumberSNS = Int64.TryParse(Console.ReadLine(), out long aux1) ? aux1 : 0;
+            patient.NumberSNS = Int64.TryParse(Console.ReadLine(), out long auxSNS) ? auxSNS : 0;
             Console.WriteLine("Diga o sexo:\n");
             patient.GenderP = (Patient.Gender)Enum.Parse(typeof(Patient.Gender), Console.ReadLine());
             Console.WriteLine("Data de entrada:\n");
