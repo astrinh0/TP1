@@ -12,15 +12,11 @@
 
 
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
 
 namespace HospitalBarcelos
 {
-
+    [Serializable]
     /// <summary>
     /// Classe de Staff que herda de Pessoa.
     /// </summary>
@@ -126,14 +122,13 @@ namespace HospitalBarcelos
             Console.WriteLine("Diga a sua data de nascimento:\n");
             staff.Birthday = DateTime.TryParse(Console.ReadLine(), out DateTime aux) ? aux : DateTime.Today;
             Console.WriteLine("Diga o number de utente:\n");
-            staff.NumberSNS = Convert.ToInt64(Console.ReadLine());
+            staff.NumberSNS = Int64.TryParse(Console.ReadLine(), out long aux1) ? aux1 : 0;
             Console.WriteLine("Diga o sexo:\n");
             staff.GenderP = (Staff.Gender)Enum.Parse(typeof(Staff.Gender), Console.ReadLine());
             Console.WriteLine("Diga o trabalho:\n");
             staff.Job = Console.ReadLine();
             Console.WriteLine("Está no turno?(Y)(N)");
             staff.Work = (Staff.Working)Enum.Parse(typeof(Staff.Working), Console.ReadLine());
-            Console.WriteLine("Data de entrada:\n");
             staff.GetActive = Staff.Active.Yes;
 
             return staff;
@@ -221,7 +216,7 @@ namespace HospitalBarcelos
                 return true;
             }
 
-            return false;
+            return true;
         }
 
 
@@ -244,7 +239,7 @@ namespace HospitalBarcelos
 
 
         /// <summary>
-        /// Remover staff
+        /// Remover staff mantendo a sua integridade
         /// </summary>
         /// <param name="staff"></param>
         /// <param name="idStaff"></param>
@@ -268,6 +263,10 @@ namespace HospitalBarcelos
 
         #region Enums
 
+
+        /// <summary>
+        /// flag para se está no turno ou não
+        /// </summary>
         public enum Working
         {
             N,

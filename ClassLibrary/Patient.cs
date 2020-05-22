@@ -12,16 +12,12 @@
 
 
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.InteropServices;
-using System.Security.Cryptography;
-using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
 
 namespace HospitalBarcelos
 {
+
+    [Serializable]
     /// <summary>
     /// Classe de Paciente que herda de Pessoa
     /// </summary>
@@ -118,7 +114,11 @@ namespace HospitalBarcelos
         #endregion
 
         #region Functions
-
+        /// <summary>
+        /// funcao para criar novo paciente
+        /// </summary>
+        /// <param name="patient"></param>
+        /// <returns></returns>
         public Patient CreateNewPatient(Patient patient)
         {
             this.idPatient = Interlocked.Increment(ref globalID);
@@ -131,7 +131,7 @@ namespace HospitalBarcelos
             Console.WriteLine("Diga a sua data de nascimento:\n");
             patient.Birthday = DateTime.TryParse(Console.ReadLine(), out DateTime aux) ? aux : DateTime.Today;
             Console.WriteLine("Diga o number de utente:\n");
-            patient.NumberSNS = Convert.ToInt64(Console.ReadLine());
+            patient.NumberSNS = Int64.TryParse(Console.ReadLine(), out long aux1) ? aux1 : 0;
             Console.WriteLine("Diga o sexo:\n");
             patient.GenderP = (Patient.Gender)Enum.Parse(typeof(Patient.Gender), Console.ReadLine());
             Console.WriteLine("Data de entrada:\n");
@@ -142,7 +142,12 @@ namespace HospitalBarcelos
 
         }
 
-
+        /// <summary>
+        /// Encontra paciente por ID
+        /// </summary>
+        /// <param name="patient"></param>
+        /// <param name="idPatient"></param>
+        /// <returns></returns>
         public Patient FindPatientById(Patient patient, int idPatient)
         {
             if (patient != null && patient.IdPatient == idPatient)
@@ -152,6 +157,13 @@ namespace HospitalBarcelos
             return null;
         }
 
+
+        /// <summary>
+        /// Encontra paciente por nome
+        /// </summary>
+        /// <param name="patient"></param>
+        /// <param name="name"></param>
+        /// <returns></returns>
         public Patient FindPatientByName(Patient patient, string name)
         {
             if (patient != null && patient.Name == name)
@@ -161,6 +173,12 @@ namespace HospitalBarcelos
             return null;
         }
 
+
+        /// <summary>
+        /// Mostra paciente que esteja activo
+        /// </summary>
+        /// <param name="patient"></param>
+        /// <returns></returns>
         public Patient ShowActivePatient(Patient patient)
         {
             if (patient != null && patient.active == Active.Yes)
@@ -171,7 +189,13 @@ namespace HospitalBarcelos
         }
 
 
-        
+        /// <summary>
+        /// Muda a morada de um paciente
+        /// </summary>
+        /// <param name="patient"></param>
+        /// <param name="address"></param>
+        /// <param name="idPatient"></param>
+        /// <returns></returns>
         public bool ChangeAddress(Patient patient, string address, int idPatient)
         {
             if (patient != null && patient.idPatient == idPatient)
@@ -183,21 +207,14 @@ namespace HospitalBarcelos
             return false;
         }
 
-        public bool LeavingHospital(Patient patient, int idPatient, DateTime date)
-        {
-            if (patient != null && patient.idPatient == idPatient)
-            {
-                patient.leave = date;
-                patient.active = Active.No;
-                return true;
-
-            }
-            return false;
-        }
-
        
 
-
+        /// <summary>
+        /// Remove paciente da urgencia mas mantem a sua integridade
+        /// </summary>
+        /// <param name="patient"></param>
+        /// <param name="idPatient"></param>
+        /// <returns></returns>
 
         public bool RemovePatient(Patient patient, int idPatient)
         {

@@ -9,60 +9,80 @@
  */
 
 
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using HospitalBarcelos;
+using System;
+using System.Linq;
 
 namespace Hospital
 {
     public class Program
     {
-
        
         static void Main()
         {
-            /// Zona de testes
+            
 
             Urgency urgency = new Urgency();
             Patient patient = new Patient();
             Staff medic = new Staff();
             MedicalAppointment medicalAppointment = new MedicalAppointment();
+
+            
+           
             urgency.LoadPatientsFromFile();
+            urgency.LoadMedicalAppointmentFromFile();
+            urgency.LoadStaffFromFile();
 
 
             Console.WriteLine("Listagem de Staff");
             Console.WriteLine();
+            Console.WriteLine("Quantidade: {0}", urgency.Patients.Count);
             urgency.PrintAllStaff(urgency.Staff);
             Console.WriteLine();
 
             Console.WriteLine("Listagem de Pacientes");
             Console.WriteLine();
+            Console.WriteLine("Quantidade: {0}", urgency.Staff.Count);
             urgency.PrintAllPatients(urgency.Patients);
             Console.WriteLine();
 
             Console.WriteLine("Listagem de Consultas Existentes");
             Console.WriteLine();
+            Console.WriteLine("Quantidade: {0}", urgency.MedicalAppointments.Count);
             urgency.PrintAllMedicalAppointments(urgency.MedicalAppointments);
+            Console.WriteLine("Premir qualquer tecla para continuar");
 
 
+            Console.ReadKey();
 
+            Console.Clear();
+            patient = patient.CreateNewPatient(patient);
+            urgency.Patients.Add(patient);
 
-            //patient = patient.CreateNewPatient(patient);
-            //urgency.Patients.Add(patient);
+            Console.WriteLine("Premir qualquer tecla para continuar");
 
-            //medic = medic.CreateNewStaff(medic);
-            //urgency.Staff.Add(medic);
+            Console.ReadKey();
+
+            Console.Clear();
+
 
             
 
-            medicalAppointment = medicalAppointment.CreateNewMedicalAppointment(medicalAppointment, patient, medic);
-            urgency.MedicalAppointments.Add(medicalAppointment);
 
+            medic = medic.CreateNewStaff(medic);
+            urgency.Staff.Add(medic);
+
+            Console.WriteLine("Premir qualquer tecla para continuar");
+
+            Console.ReadKey();
+
+            Console.Clear();
 
             
+
+
+
+
 
             urgency.AddDiseaseToPatient(urgency.Patients, 1);
             urgency.Patients.Sort((x, y) => -x.Screen.CompareTo(y.Screen));
@@ -71,8 +91,14 @@ namespace Hospital
             urgency.Patients.Sort((x, y) => -x.Screen.CompareTo(y.Screen));
 
 
-            
 
+            Console.WriteLine("Premir qualquer tecla para continuar");
+
+            Console.ReadKey();
+
+            Console.Clear();
+
+            
 
 
 
@@ -82,7 +108,7 @@ namespace Hospital
 
 
 
-           
+
 
 
 
@@ -108,8 +134,15 @@ namespace Hospital
 
 
             urgency.SavePatientsToFile();
+            urgency.SaveStaffToFile();
+            urgency.SaveMedicalAppointmentsToFile();
+
+            Console.WriteLine("Premir qualquer tecla para fechar");
+
 
             Console.ReadKey();
+
+            Environment.Exit(1);
 
 
 
