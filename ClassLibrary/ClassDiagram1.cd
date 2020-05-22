@@ -7,8 +7,20 @@
       <FileName>MedicalAppointment.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="HospitalBarcelos.Patient" Collapsed="true">
+  <Class Name="HospitalBarcelos.Patient">
     <Position X="12.75" Y="2.75" Width="1.5" />
+    <NestedTypes>
+      <Enum Name="HospitalBarcelos.Patient.Attended" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Patient.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Enum>
+      <Enum Name="HospitalBarcelos.Patient.Screening" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Patient.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Enum>
+    </NestedTypes>
     <TypeIdentifier>
       <HashCode>IACAAAQAJAAEAAAABAAAACCQAgEggAABgEAAEAIAAAg=</HashCode>
       <FileName>Patient.cs</FileName>
