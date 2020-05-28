@@ -1,14 +1,17 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1">
-  <Class Name="HospitalBarcelos.MedicalAppointment" Collapsed="true">
-    <Position X="11" Y="0.5" Width="1.5" />
+  <Class Name="HospitalBarcelos.MedicalAppointment">
+    <Position X="7.75" Y="0.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAACAAAIAAEACAEAAAEAACAAAAggAAJAAAEAQAAAAA=</HashCode>
       <FileName>MedicalAppointment.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="HospitalBarcelos.Patient">
-    <Position X="12.75" Y="2.75" Width="1.5" />
+    <Position X="14" Y="0.75" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Nested Types" Collapsed="false" />
+    </Compartments>
     <NestedTypes>
       <Enum Name="HospitalBarcelos.Patient.Attended" Collapsed="true">
         <TypeIdentifier>
@@ -26,22 +29,47 @@
       <FileName>Patient.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="HospitalBarcelos.Person" Collapsed="true">
+  <Class Name="HospitalBarcelos.Person">
     <Position X="9.75" Y="3.5" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Nested Types" Collapsed="false" />
+    </Compartments>
+    <NestedTypes>
+      <Enum Name="HospitalBarcelos.Person.Gender" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Person.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Enum>
+      <Enum Name="HospitalBarcelos.Person.Active" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Person.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Enum>
+    </NestedTypes>
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAACIAAgAwAAAIMAAACAgAIIAIAAAA=</HashCode>
       <FileName>Person.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="HospitalBarcelos.Staff" Collapsed="true">
-    <Position X="8" Y="2.5" Width="1.5" />
+  <Class Name="HospitalBarcelos.Staff">
+    <Position X="5.75" Y="2.5" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Nested Types" Collapsed="false" />
+    </Compartments>
+    <NestedTypes>
+      <Enum Name="HospitalBarcelos.Staff.Working" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Staff.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Enum>
+    </NestedTypes>
     <TypeIdentifier>
       <HashCode>BAhAAAQAAAQAAAAAAQAAAAIAAAAiAAIAAQAAAAIACIA=</HashCode>
       <FileName>Staff.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="HospitalBarcelos.Urgency" Collapsed="true">
-    <Position X="5.5" Y="0.75" Width="1.5" />
+  <Class Name="HospitalBarcelos.Urgency">
+    <Position X="2.5" Y="0.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>EACAAAAAChAAABAAAAYAIAAgIGAEAQIJhEMAAEAAAAA=</HashCode>
       <FileName>Urgency.cs</FileName>
